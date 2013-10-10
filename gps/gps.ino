@@ -1,6 +1,7 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial gpsSerial(10, 11); // RX, TX (TX not used)
+SoftwareSerial gpsSerial(10, 11); // 10 in : 11 out
+//SoftwareSerial xBeeSerial(3, 5);  // 3  in : 5  out
 const int sentenceSize = 80;
 
 char sentence[sentenceSize];
@@ -9,6 +10,7 @@ void setup()
 {
   Serial.begin(9600);
   gpsSerial.begin(9600);
+//  xBeeSerial.begin(9600);
 }
 
 void loop()
@@ -24,9 +26,9 @@ void loop()
     }
     else
     {
-     sentence[i] = '\0';
-     i = 0;
-     displayGPS();
+      sentence[i] = '\0';
+      i = 0;
+      displayGPS();
     }
   }
 }
@@ -34,12 +36,13 @@ void loop()
 void displayGPS()
 {
   char field[20];
+  
   getField(field, 0);
   if (strcmp(field, "$GPGGA") == 0)
   {
     Serial.print("# Sat: ");
     getField(field, 6);
-    Serial.print(field);  
+    Serial.print(field);
   }
   if (strcmp(field, "$GPRMC") == 0)
   {    
@@ -48,7 +51,7 @@ void displayGPS()
     Serial.print(field);
     getField(field, 4); // N/S
     Serial.print(field);
-    
+
     Serial.print(" Long: ");
     getField(field, 5);  // number
     Serial.print(field);
@@ -78,3 +81,4 @@ void getField(char* buffer, int index)
   }
   buffer[fieldPos] = '\0';
 } 
+
