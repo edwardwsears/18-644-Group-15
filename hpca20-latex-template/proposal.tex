@@ -7,7 +7,7 @@
 
 \title{
 18-644 Fall 2013 Project Proposal: GPS Bus Tracker}
-\author{Edward Sears \and Grant Skudlarek \and Kory Stiger}
+\author{Edward Sears <esears@andrew.cmu.edu> \and Grant Skudlarek <gskudlar@andrew.cmu.edu> \and Kory Stiger <kstiger@andrew.cmu.edu>}
 
 \date{}
 \maketitle
@@ -15,14 +15,20 @@
 \thispagestyle{empty}
 
 \begin{abstract}
+In this paper, we will propose a novel way to track busses and 
+accurately predict arrival times.  We start by formally stating
+the problem and its importance.  We then list the competition 
+and their subsequent limitations.  Lastly, we describe our 
+idea and list the various benefits associated with implementing 
+our idea.
 \end{abstract}
 
 \section{The Problem}
 
-    Public transporation can be an important asset to any city. If widely 
+Public transporation can be an important asset to any city. If widely 
 used, it can improve air quality, reduce traffic congestion, and more 
-importantly provide transportation for those who do not have cars.  
-However, in Pittsburgh (and many other cities across the country) 
+importantly provide transportation for low income families \cite{Criden08} and those who 
+do not have cars.  However, in Pittsburgh (and many other cities across the country) 
 the public transportation is very unreliable.  The bus system posts 
 schedules, but can rarely stick to them.  This can cause up to an 
 hour delay between the scheduled time and the bus arrival time.  For 
@@ -35,7 +41,11 @@ without any mode of transportation.
 
 \section{Importance}
 
--increase in revenue for bus companies
+Making public transportation more user friendly could entice many more 
+people to use it.  This would not only increase revenues for the bus 
+company, but would create a valuable resource for the residents of 
+the city.  More people could rely on the bus system on a regular basis 
+and could increase the quality of living in the city in general.
 
 \section{Competition}
 
@@ -49,11 +59,11 @@ without any mode of transportation.
     Google Maps & Only posts scheduled times \\
     \hline
     CTA Bus Tracker & Chicago specific \\
-        &(not easily expandable)\\
+        &(not easily expandable)\cite{CTA} \\
     \hline
     Tiramisu & Relies on individuals \\
                     &to report bus activity\\
-                    &(crowdsourced) \\
+                    &(crowdsourced) \cite{Tiramisu}\\
     \hline
     Maimi-Dade  & Miami Specific,\\
     Bus Tracker & Only tracks a single route \\
@@ -99,9 +109,22 @@ via the phone serial port.
 
 \section{Benefits of Our Idea}
 
--Reliable, uses hw not crowdsourcing
--Easily set up in any city (if routs tied into google maps)
--Cost effective
+Our idea is more effective than current methods for 3 main reasons:
+\begin{itemize}
+\item Reliability: Because our system uses real hardware instead of 
+        relying on crowdsourcing techniques, the quality of service
+        does not vary by time of day or by popularity.
+\item Easy Set Up: Our system can leverage the bus route data that 
+        is curretly present in Google Maps.  Because of this, 
+        our system can be easily ported to different cities 
+        and different public transportation modes.
+\item Accurate Prediction:  Our system will have the ability to 
+        accurately predict arrival times for busses by learning 
+        trends.  These trends will be based upon time of day as 
+        well as other historical factors.  This can create a much 
+        more intellegent prediction mechanism compared to other 
+        bus tracking services.
+\end{itemize}
 
 \bstctlcite{bstctl:etal, bstctl:nodash, bstctl:simpurl}
 \bibliographystyle{IEEEtranS}
