@@ -64,13 +64,44 @@ without any mode of transportation.
 
 \section{Our Idea}
 
+We wish to predict bus arrival times via GPS tracking of all buses in Pittsburgh.
+GPS modules placed on each bus would transmit the buses coordinates to a server
+application via cell networks. The server could then serve bus location data
+to users via the internet, who may be accessing the data through their mobile
+devices.
+
+While GPS data will let users know where buses are, it may not let them
+know how long it will take for the bus to arrive at their stop. The user will
+not be able to know if the bus is stuck in traffic, or if it will arrive within
+a reasonable amount of time. The Pittsburgh bus schedule already shows how long
+it usually takes for a bus to travel between stops. In the absence of traffic,
+this data can be used to determine when the bus will arrive, based on its current
+position along the route.
+
+In order to give users accurate results regardless of conditions, traffic patterns
+must be gathered in real time, or be based on a record of past traffic patterns.
+One approach which we are considering taking is the use of Google traffic data.
+By querying Google traffic data in real time along the buses route, the
+appropriate traffic delay can be added based on the situation. The other approach
+we are considering would be to accumulate a model of traffic patterns over a 
+time period. This data, accumulated from past bus runs, would allow arrival time
+on a route to be predicted during a certain time of day. The actual position
+data and journey times of buses could be used to make the model more accurate. 
+For the time period used for the model, longer time periods would allow more 
+accurate predictions, but shorter time periods allow for faster adaption and 
+deployment. We've determined that the best compromise would be week-long cycles.
+
+The hardware module would require a GPS receiver, a processing unit, and a
+cellular modem. For our proof of concept, we will use an Arduino for the
+processing unit. For the modem component, we will use an inexpensive cell
+phone connected to a circuit board which can access the cellular modem
+via the phone serial port.
 
 \section{Benefits of Our Idea}
 
 -Reliable, uses hw not crowdsourcing
 -Easily set up in any city (if routs tied into google maps)
 -Cost effective
-
 
 \bstctlcite{bstctl:etal, bstctl:nodash, bstctl:simpurl}
 \bibliographystyle{IEEEtranS}
