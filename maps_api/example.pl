@@ -9,16 +9,13 @@ use LWP::Simple;
 
 print "Sample google maps api call\n\n";
 
-my $url = 'http://maps.googleapis.com/maps/api/directions/json?origin=Pittsburgh&destination=Philidelphia&sensor=false';
+#can do gps coordinates as well
+my $start_location = "Pittsburgh";
+my $end_location = "Philidelphia";
 
-#$request = HTTP::Request->new(GET => $url);
-#
-#$ua = LWP::UserAgent->new;
-#$response = $ua->request($request);
-#$json_response = $response->decoded_content;
-#
-##print "\n\n".$json_response."\n";
+my $url = 'http://maps.googleapis.com/maps/api/directions/json?origin='.$start_location.'&destination='.$end_location.'&sensor=false';
 
+#make api call
 my $json_response = get($url);
 die "Could not get $url!" unless defined $json_response;
 
