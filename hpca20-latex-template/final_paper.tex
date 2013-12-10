@@ -146,7 +146,6 @@ application would have been unnecessary and ultimately would have limited the us
 base to one type of smartphone. Using a web-based approach meant that the 
 application would be reachable by the maximum number of users - even including 
 anyone with a simple internet connection in addition to those using a smartphone.
-
 \subsubsection{Setup}
 The actual setup of the UI (or front end application), was quite simple. The HTML
 portion of it was kept as simple as possible with just a few buttons and an area to hold 
@@ -163,7 +162,6 @@ then the user’s current position is loaded as a green marker. When the user cl
 taps) on the map, a red marker will appear and its position information is what is used in 
 conjunction with the buttons below the map. When the user requests to “Find Buses”, 
 an API call is made to determine the estimated time of arrival of the buses.
-
 \subsubsection{Challanges}
 The most interesting discovery after working on this part deals with how the 
 Google API estimated time. The first attempt to get time estimations involved sending a 
@@ -184,7 +182,6 @@ were obviously many options for the type of server and database, however the tea
 decided to use Node.js and MongoDB because of previously gained expertise. In 
 addition, this setup was beneficial because MongoDB easily plugs into a Node.js server 
 and Node.js is written in javascript so it is very easy to work with for web applications.
-
 \subsubsection{Setup}
 The two most important parts about the back end is the implementation of the
 database to hold the tracked bus points and the inclusion of the bus tracking algorithms. 
@@ -197,7 +194,6 @@ been pre-recorded and are thus automatically stored at the start of each reboot.
 simplicity’s sake, the few known bus routes with which testing was done were simply 
 hard coded at the end of the server file in order to avoid having to debug the linking 
 errors sure to arise from including multiple files.
-
 \subsubsection{Challanges}
 As it turns out, every database access, whether it be an update, search, or save, 
 is fully asynchronous. This made it difficult to preserve the flow of the program since the 
@@ -320,6 +316,71 @@ This list will be used in the Google Maps API call that will
 determine the estimated time of arrival for the specified bus.
 
 \section{Hardware}
+\subsection{Design}
+
+The hardware portion of our system was a GPS tracker module. The GPS
+tracker was to be put onto buses and transmit a bus’ GPS coordinates to the bus 
+tracking database server in real-time. As the purpose of our system was to receive 
+real-time updates on bus locations, our system needed a means of receiving this 
+coordinate data from buses. There exist several means of data transmission with 
+varying ranges of effective transmission distance. However, in this case, the longest 
+transmission range possible would optimal, as this would allow for ease of contact 
+between transmitter and receiver. This would promote the flow of real-time 
+updates. We settled on using a cellular modem to fill this purpose. As we had no 
+custom radio network to receive the signals from whatever radio transmitter we
+paired with the GPS, cell networks offered a readily serviceable solution.
+
+\subsection{Implementation}
+
+The GPS receiving and cell transmitting are linked via a processing unit, 
+which handles the GPS coordinates and then formats commands for the cellular 
+modem. An Arduino Uno serves as the processing unit for the module, chosen due to 
+its ease of programmability as well as the wealth of hardware which can interface 
+with it. For the cellular modem, we choose the SM5100B, a GSM modem which can 
+transmit over either AT\&T or T-Mobile networks, given a SIM card. For the GPS 
+receiver, we chose a Venus GPS with SMA Connector. In addition to these parts, we 
+acquired a quad-band antenna for cellular radio transmission as well as an antenna 
+suitable for GPS reception.
+
+\subsection{Challenges}
+
+The GPS receiving and cell transmitting are linked via a processing unit, 
+which handles the GPS coordinates and then formats commands for the cellular 
+modem. An Arduino Uno serves as the processing unit for the module, chosen due to 
+its ease of programmability as well as the wealth of hardware which can interface 
+with it. For the cellular modem, we choose the SM5100B, a GSM modem which can 
+transmit over either AT\&T or T-Mobile networks, given a SIM card. For the GPS 
+receiver, we chose a Venus GPS with SMA Connector. In addition to these parts, we 
+acquired a quad-band antenna for cellular radio transmission as well as an antenna 
+suitable for GPS reception.
+
+\subsection{Alternate Solution}
+
+Not being able to transmit GPS coordinates from a remote position was not
+an option for our project, as this was a fundamental portion of the system 
+implementation. We found that a smart phone was a natural and suitable 
+replacement. Current smart phones conveniently package together GPS receiving, 
+processing, and cellular transmission technologies. Given that smart phones also 
+have powerful web browsing capabilities, we found that we could integrate a cell 
+phone bus-tracking mechanism into the front end of our web-application. To track 
+the bus-tracking phone’s position, the web application leveraged HTML5 
+geolocation features. This browser features interfaces with whatever location 
+awareness is available to a device, which includes a cell phone’s GPS when activated. 
+Coordinates acquired from geolocation could then be sent to the application back 
+end via GET request from the web application. While we did not differentiate 
+between the user interface and the bus interface to the web application, this 
+provided a strong substitute to the original custom GPS module.
+
+\section {Conclusion}
+
+In this paper, we have outlined a novel GPS bus tracking system and described 
+one such preliminary implementation of the system.  Our design surpasses 
+current available tracking systems in terms of portability, ease of setup, 
+and reliability. The system appears transparent to bus operators and likewise 
+eliminates errors caused by operator error.  Setup is reduced to an initial input 
+of bus route coordinates when the system is first installed.  Lastly, our 
+system is not limited for use by phones and is available to anyone with an 
+internet connection.
 
 \bstctlcite{bstctl:etal, bstctl:nodash, bstctl:simpurl}
 \bibliographystyle{IEEEtranS}
